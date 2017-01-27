@@ -73,7 +73,7 @@ node {
     ///RAMESH
     stage('Promote Image') {
       // All the tests passed. We can now retag and push the 'latest' image.
-      pcImg.push('latest')
+      //pcImg.push('latest')
     }
   }
 }
