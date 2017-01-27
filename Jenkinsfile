@@ -59,9 +59,18 @@ node {
           }
         }
       }
-      input "How do you like ${env.BUILD_URL}artifact/screenshot.jpg?"
+      //input "How do you like ${env.BUILD_URL}artifact/screenshot.jpg?"
+      
+      /////RAMESH
+      //Push the image to a temporary registry and then
+      //CREATE an request in BugZilla to approve the build
+      ////RAMESH
     }
 
+    /////RAMESH
+    //Get this stage invoked only on approval of the Bugzilla ticket. It basically means it will be a seperate job.
+    //On approval, invoke the build on the job which takes the local repo and pushes to remote repo
+    ///RAMESH
     stage('Promote Image') {
       // All the tests passed. We can now retag and push the 'latest' image.
       pcImg.push('latest')
