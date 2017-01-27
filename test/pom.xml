@@ -46,6 +46,16 @@
 	<scope>test</scope>
 </dependency>
 
+
+<dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId> -->
+            <!-- <version>2.53.1</version> -->
+            <!-- 19/October.2016
+                have upgraded to 3.0.1 for MyFirstTest --> <!--
+			<version>3.0.1</version>
+</dependency>
+
         <dependency>
                  <groupId>org.seleniumhq.selenium</groupId>
                  <artifactId>htmlunit-driver</artifactId>
