@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.io.IOException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
+//import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class PetClinicAppTest {
 
