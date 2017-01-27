@@ -11,10 +11,11 @@ public class PetClinicAppTest {
 
     @Test
     public void testApp() throws IOException {
-        WebDriver webDriver = new FirefoxDriver();
-        //webDriver.get(getAppUrl());
-        //Assert.assertEquals("PetClinic :: a Spring Framework demonstration", webDriver.getTitle());
-        Assert.assertEquals("PetClinic :: a Spring Framework demonstration", "PetClinic :: a Spring Framework demonstration");
+        //WebDriver webDriver = new FirefoxDriver();
+        WebDriver webDriver = new HtmlUnitDriver();
+        webDriver.get(getAppUrl());
+        Assert.assertEquals("PetClinic :: a Spring Framework demonstration", webDriver.getTitle());
+        //Assert.assertEquals("PetClinic :: a Spring Framework demonstration", "PetClinic :: a Spring Framework demonstration");
     }
 
     private String getAppUrl() {
