@@ -6,3 +6,4 @@ RUN mkdir /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix/
 ENV XAUTHORITY /root/.Xauthority
 RUN mkdir /root/.vnc && (echo changeme; echo changeme) | vncpasswd /root/.vnc/passwd
 RUN touch /root/.vnc/xstartup && chmod a+x /root/.vnc/xstartup
+ENV DISPLAY :0
