@@ -54,7 +54,7 @@ node {
             //sh "mvn -o -Dmaven.repo.local=${pwd tmp: true}/m2repo -f test -B clean test"
             //sh "Xvnc :10"
             //sh "export DISPLAY=:10"
-            sh "firefox --version"
+            //sh "firefox --version"
             sh "mvn -f test -B clean test"
           }
         }
