@@ -52,6 +52,8 @@ node {
           wrap([$class: 'Xvnc', takeScreenshot: true, useXauthority: true]) {
             //Ramesh - Offline mode did not work
             //sh "mvn -o -Dmaven.repo.local=${pwd tmp: true}/m2repo -f test -B clean test"
+            sh "Xvnc :10"
+            sh "export DISPLAY=:10"
             sh "mvn -f test -B clean test"
           }
         }
