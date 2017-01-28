@@ -1,5 +1,5 @@
 node {
-  
+  def PWD = pwd()
   stage('Code Pickup') {
     git 'https://github.com/RameshThangamuthu/docker_workflow_plugin_demo.git'
   }
@@ -22,7 +22,7 @@ node {
   */
     
     try{     
-      sh "docker run --name ${env.BUILD_TAG}  -t -d -u 0:0 -w ${pwd} --volumes-from d6189a8e5ee9ed30127d402eef609852b7e8328a19621c6c12235b07d3343244"
+      sh "docker run --name ${env.BUILD_TAG}  -t -d -u 0:0 -w ${PWD} --volumes-from d6189a8e5ee9ed30127d402eef609852b7e8328a19621c6c12235b07d3343244"
     }finally{
     
     }}
