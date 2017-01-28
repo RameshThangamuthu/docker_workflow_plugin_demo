@@ -7,11 +7,31 @@ node {
   stage('Build') {
       appCompileAndPackageImg = docker.build("mec/application-build:${env.BUILD_TAG}", "--file app/Dockerfile.build app")      
     
+    
+    File theDockerFile = new File( "app/Dockerfile.build" )
+    def dockerCMD
+    if( !theDockerFile.exists() ) {
+      println "Docker File does not exist"
+    } else {   
+      // Step through each line in the file
+      theDockerFile.eachLine { line ->
+        // If the line isn't blank
+        println("Ramesh: " + line);
+        if( line.trim() && line.startsWith("CMD")) {
+          dockerCMD = line.subString(line.indexOf("CMD")+3);
+        }
+        else {
+
+        }
+      } 
+    }
+  }
+    
+    
     /*  
     appCompileAndPackageImg.withRun {       
           buildContainer->sh "/bin/sh"
-      }
-
+      } 
     
       
       appCompileAndPackageImg.inside {        
@@ -20,12 +40,13 @@ node {
       }
     }
   */
-    
+    /*
     try{     
       sh "docker run --name ${env.BUILD_TAG}  -t -d -u 0:0 -w ${PWD} --volumes-from d6189a8e5ee9ed30127d402eef609852b7e8328a19621c6c12235b07d3343244 mec/application-build:${env.BUILD_TAG}"
     }finally{
        
-    }}
+    }
+  */
 /*
   // We are pushing to a private secure Docker registry in this demo.
   // 'docker-registry-login' is the username/password credentials ID as defined in Jenkins Credentials.
