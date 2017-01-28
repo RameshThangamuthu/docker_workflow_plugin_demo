@@ -1,13 +1,8 @@
 node {
-  git 'https://github.com/RameshThangamuthu/docker_workflow_plugin_demo.git'
-
   def maven = docker.image('maven:3.3.9-jdk-8'); // https://registry.hub.docker.com/_/maven/
 
-  stage('Mirror') {
-    // First make sure the slave has this image.
-    // (If you could set your registry below to mirror Docker Hub,
-    // this would be unnecessary as maven.inside would pull the image.)
-    maven.pull()
+  stage('Code Pickup') {
+    git 'https://github.com/RameshThangamuthu/docker_workflow_plugin_demo.git'
   }
 
   // We are pushing to a private secure Docker registry in this demo.
@@ -15,7 +10,8 @@ node {
   // This is used to authenticate the Docker client to the registry.
   docker.withRegistry('http://localhost/', 'docker-registry-login') {
 
-    stage('Build') {
+  stage('Build') {
+       appCompileAndPackageImg = docker.build("localhost/spring-petclinic-build:${env.BUILD_TAG}", 'app/Dockerfile.build')
       // Spin up a Maven container to build the petclinic app from source.
       // First set up a shared Maven repo so we don't need to download all dependencies on every build.
       maven.inside {
