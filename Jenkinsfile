@@ -15,7 +15,7 @@ node {
     
       
       appCompileAndPackageImg.inside {        
-        sh "mvn -B clean package"    
+        sh "mvn -f app -B clean package"    
         sh "/bin/sh"
       }
     }
