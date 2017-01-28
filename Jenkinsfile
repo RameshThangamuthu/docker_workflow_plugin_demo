@@ -11,13 +11,20 @@ node {
     appCompileAndPackageImg.withRun {       
           buildContainer->sh "/bin/sh"
       }
-*/
+
     
       
       appCompileAndPackageImg.inside {        
         sh "mvn -f app -B clean package"    
         sh "/bin/sh"
       }
+    }
+  */
+    
+    try{     
+      sh "docker run --name ${env.BUILD_TAG}  -t -d -u 0:0 -w ${pwd} --volumes-from ${hostname}
+    }finally{
+    
     }
 /*
   // We are pushing to a private secure Docker registry in this demo.
