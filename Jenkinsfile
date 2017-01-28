@@ -7,7 +7,8 @@ node {
   stage('Build') {
       appCompileAndPackageImg = docker.build("mec/application-build:${env.BUILD_TAG}", "--file app/Dockerfile.build app")      
       appCompileAndPackageImg.inside {        
-        sh "echo building"       
+        sh "echo building"    
+        sh "/bin/sh"
       }
     }
 /*
