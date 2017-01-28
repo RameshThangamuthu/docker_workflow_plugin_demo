@@ -8,7 +8,7 @@ node {
       appCompileAndPackageImg = docker.build("mec/application-build:${env.BUILD_TAG}", "--file app/Dockerfile.build app")      
     
       appCompileAndPackageImg.withRun {       
- 
+          buildContainer->sh "/bin/sh"
       }
     
       /*
