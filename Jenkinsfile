@@ -1,26 +1,20 @@
 node {
-  def maven = docker.image('maven:3.3.9-jdk-8'); // https://registry.hub.docker.com/_/maven/
-
+  
   stage('Code Pickup') {
     git 'https://github.com/RameshThangamuthu/docker_workflow_plugin_demo.git'
   }
-
+  
+  stage('Build') {
+      appCompileAndPackageImg = docker.build("mec/application-build:${env.BUILD_TAG}", 'app/Dockerfile.build')      
+      appCompileAndPackageImg.inside {        
+        sh "echo building"       
+      }
+    }
+/*
   // We are pushing to a private secure Docker registry in this demo.
   // 'docker-registry-login' is the username/password credentials ID as defined in Jenkins Credentials.
   // This is used to authenticate the Docker client to the registry.
   docker.withRegistry('http://localhost/', 'docker-registry-login') {
-
-  stage('Build') {
-       appCompileAndPackageImg = docker.build("localhost/spring-petclinic-build:${env.BUILD_TAG}", 'app/Dockerfile.build')
-      // Spin up a Maven container to build the petclinic app from source.
-      // First set up a shared Maven repo so we don't need to download all dependencies on every build.
-      maven.inside {
-        //Ramesh - Offline mode did not work
-        //sh "mvn -o -Dmaven.repo.local=${pwd tmp: true}/m2repo -f app -B -DskipTests clean package"
-        sh "mvn  -f app -B -DskipTests clean package"
-        // The app .war and Dockerfile are now available in the workspace. See below.
-      }
-    }
 
     def pcImg
     stage('Bake Docker image') {
@@ -30,7 +24,7 @@ node {
       // (see above maven.inside() block), so we specify that.
       // The Dockerfile expects the petclinic.war file to be in the 'target' dir
       // relative to its own directory, which will be the case.
-      pcImg = docker.build("examplecorp/spring-petclinic:${env.BUILD_TAG}", 'app')
+      pcImg = docker.build("mec/application:${env.BUILD_TAG}", 'app')
 
       // Let us tag and push the newly built image. Will tag using the image name provided
       // in the 'docker.build' call above (which included the build number on the tag).
@@ -40,7 +34,7 @@ node {
     stage('Test Image') {
       // Spin up a Maven + Xvnc test container, linking it to the petclinic app container
       // allowing the Maven tests to send HTTP requests between the containers.
-      def testImg = docker.build('examplecorp/spring-petclinic-tests:snapshot', 'test')
+      def testImg = docker.build('mec/application-tests:snapshot', 'test')
       // Run the petclinic app in its own Docker container.
       pcImg.withRun {petclinic ->
         testImg.inside("--link=${petclinic.id}:petclinic") {
@@ -71,5 +65,5 @@ node {
       // All the tests passed. We can now retag and push the 'latest' image.
       //pcImg.push('latest')
     }
-  }
+  } */
 }
