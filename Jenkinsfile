@@ -8,28 +8,13 @@ node {
       appCompileAndPackageImg = docker.build("mec/application-build:${env.BUILD_TAG}", "--file app/Dockerfile.build app")      
     
       def dockerCMD = readFile 'app/Dockerfile.build'
-      echo dockerCMD
+      echo dockerCMD.substring(dockerCMD.indexOf('CMD')+3, dockerCMD.length())
+      
+      appCompileAndPackageImg.inside {        
+        sh dockerCMD.substring(dockerCMD.indexOf('CMD')+3, dockerCMD.length())
+      }
   }
-    /*
-    File theDockerFile = new File( "app/Dockerfile.build" )
-    def dockerCMD
-    if( !theDockerFile.exists() ) {
-      println "Docker File does not exist"
-    } else {   
-      // Step through each line in the file
-      theDockerFile.eachLine { line ->
-        // If the line isn't blank
-        println("Ramesh: " + line);
-        if( line.trim() && line.startsWith("CMD")) {
-          dockerCMD = line.subString(line.indexOf("CMD")+3);
-        }
-        else {
-
-        }
-      } 
-    }
-  
-*/
+    
     
     
     /*  
