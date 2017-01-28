@@ -7,15 +7,17 @@ node {
   stage('Build') {
       appCompileAndPackageImg = docker.build("mec/application-build:${env.BUILD_TAG}", "--file app/Dockerfile.build app")      
     
-      appCompileAndPackageImg.withRun {       
+    /*  
+    appCompileAndPackageImg.withRun {       
           buildContainer->sh "/bin/sh"
       }
+*/
     
-      /*
+      
       appCompileAndPackageImg.inside {        
-        sh "echo building"    
+        sh "mvn -B clean package"    
         sh "/bin/sh"
-      }*/
+      }
     }
 /*
   // We are pushing to a private secure Docker registry in this demo.
