@@ -7,7 +7,9 @@ node {
   stage('Build') {
       appCompileAndPackageImg = docker.build("mec/application-build:${env.BUILD_TAG}", "--file app/Dockerfile.build app")      
     
-    
+      def dockerCMD = readFile 'app/Dockerfile.build'
+    echo ${dockerCMD}
+    /*
     File theDockerFile = new File( "app/Dockerfile.build" )
     def dockerCMD
     if( !theDockerFile.exists() ) {
@@ -25,7 +27,8 @@ node {
         }
       } 
     }
-  }
+  
+*/
     
     
     /*  
