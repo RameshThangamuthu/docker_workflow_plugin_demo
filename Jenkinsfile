@@ -1,5 +1,6 @@
 node {
   def PWD = pwd()
+  //Purposefully commented for frequent API layer test
   /*
   stage('Code Pickup') {
     git 'https://github.com/RameshThangamuthu/docker_workflow_plugin_demo.git'
