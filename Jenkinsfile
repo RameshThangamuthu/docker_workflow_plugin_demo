@@ -1,5 +1,6 @@
 node {
   def PWD = pwd()
+  /*
   stage('Code Pickup') {
     git 'https://github.com/RameshThangamuthu/docker_workflow_plugin_demo.git'
   }
@@ -13,7 +14,7 @@ node {
       appCompileAndPackageImg.inside {        
         sh dockerCMD.substring(dockerCMD.indexOf('CMD')+3, dockerCMD.length())
       }
-  }
+  }*/
     
     
     
