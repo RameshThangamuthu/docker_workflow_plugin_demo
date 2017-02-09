@@ -1,0 +1,1 @@
+FROM tfennelly/tomcat7ADD target/petclinic.war /tomcat7/webapps/petclinic.war
